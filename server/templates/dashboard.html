@@ -1,0 +1,109 @@
+<!-- dashboard -->
+<div class="layui-container">
+  
+  <div class="nav">
+    <ul class="layui-nav" lay-filter="">
+      <li class="layui-nav-item">VII Admin</li>
+    </ul>  
+    
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">wellcome: <%=user.username%></a>
+      </li>
+      <li class="layui-nav-item"><a href="/logout">Logout</a></li>
+    </ul>
+
+  </div>
+
+  <div class="main">
+
+    <%#面板，当前创世用户相关%>
+    <div class="layui-card">
+      <div class="layui-card-header">Genesis Codes</div>
+      
+        <%if(genesis.length === 0){%>
+          <%#没有创世code%>
+          <div class="layui-card-body"></div>
+            <button id="btnGenesis" type="button" class="layui-btn">generate 11 random genesis</button>
+          </div>
+        <%}else{%>
+          <table id="genesisTable" lay-filter="genesisTable" class="layui-card-body">
+            <thead>
+              <tr>
+                <th lay-data="{field:'code', width:120, sort:true}">Code</th>
+                <th lay-data="{field:'usedby', sort:true}">Usedby</th>
+                <th lay-data="{field:'isteam'}">Isteam</th>
+              </tr> 
+            </thead>
+            <tbody>
+              <%genesis.forEach(function (item) {%>
+              <tr>
+                <td><%=item.code%></td>
+                <td><%=item.usedby%></td>
+                <td><%=(item.isteam ? 'Y' : 'N')%></td>
+              </tr>
+              <%})%>
+            </tbody>
+        </table>
+
+        <%}%>
+    </div>
+
+    <%#当前用户相关%>
+    <div class="layui-card" style="margin-top: 2rem;">
+      <div class="layui-card-header">Users</div>
+          <table id="usersTable" lay-filter="users" class="layui-card-body"></table>
+    </div>
+
+
+  </div>
+
+  <script>
+    
+  layui.use('table', function(){
+    var $ = layui.jquery;
+    var layer = layui.layer;
+    var table = layui.table;
+
+    //转换静态表格
+    table.init('genesisTable', {
+      height: 480
+      ,limit: 11 
+    }); 
+
+    table.render({
+      elem: '#usersTable'
+      ,height: 460
+      ,url: '/admin/users' //数据接口
+      ,page: true //开启分页
+      ,cols: [[ //表头
+        {field: 'address', title: 'Accountid',sort: true, fixed: 'left'}
+        ,{field: 'code', title: 'Code', width:100}
+        ,{field: 'invite', title: 'Invite', width:120, sort: true}
+        ,{field: 'created', title: 'Created'} 
+      ]]
+    });
+
+    $("#btnGenesis").click(function(){
+      var index = layer.load(1, {
+        shade: true
+      });
+      $.ajax({
+        url: `/admin/genesis`,
+        method: 'GET',
+        success: function(response){
+          layer.close(index)
+          window.location.reload()
+        },
+        error: function(err){
+          layer.close(index)
+          layer.msg(err.message);
+          
+        }
+      })
+    })
+
+  });
+  </script>
+
+</div>

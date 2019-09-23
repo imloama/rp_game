@@ -1,0 +1,49 @@
+<div class="layui-container">
+
+  <div class="layui-row" style="margin-top: 10%;">
+    <div class="layui-col-md4">
+      &nbsp;
+    </div>
+    <div class="layui-col-md4">
+      
+      <form class="layui-form" action="/login" method="POST">
+        <div class="layui-form-item">
+          <label class="layui-form-label">Username</label>
+          <div class="layui-input-block">
+            <input type="text" name="username" required  lay-verify="required" placeholder="Input your username" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">Password</label>
+          <div class="layui-input-inline">
+            <input type="password" name="password" required lay-verify="required" placeholder="Input your password" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="doLogin">Sign In</button>
+            <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
+          </div>
+        </div>
+      </form>
+       
+      <script>
+      layui.use('form', function(){
+        var form = layui.form;
+        
+        //监听提交
+        form.on('submit(doLogin)', function(data){
+          return true;
+        });
+      });
+      </script>
+
+
+    </div>
+    <div class="layui-col-md4">
+        &nbsp;
+    </div>
+    
+  </div>
+
+  </div> <!-- /container -->
