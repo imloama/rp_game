@@ -7,30 +7,28 @@ module.exports = {
   // 数据库配置
   dbconfig: {
     type: "sqlite",
-    database: path.resolve(__dirname, `../vii.db`),
+    database: path.resolve(__dirname, `../rpgame.db`),
     synchronize: true,
     logging: true,
     // logging: config.debug ? 'all': true,
     entities: [
-        new EntitySchema(models.Users),
-        new EntitySchema(models.Genesis),
         new EntitySchema(models.Admin),
+        new EntitySchema(models.Assets),
+        new EntitySchema(models.Balances),
+        new EntitySchema(models.RPRoom),
+        new EntitySchema(models.RPPart),
+        new EntitySchema(models.RPTrans),
+        new EntitySchema(models.RPSTrans),
+        new EntitySchema(models.WeekFee),
+        new EntitySchema(models.Rewards),
+        new EntitySchema(models.Withdraws)
     ]
   },
   loglevel: 'debug',
 
-  horizon: 'http://13.125.42.154:8000',
-  network: 'Public Global VIICoin Network ; July 2019',
+  horizon: 'https://horizon.stellar.org',
+  network: 'Public Global Stellar Network ; September 2015',
 
 
-  active: {
-    enable: true,
-    // 激活账户最少余额
-    amount: '0.001',
-    // 用哪个账户给用户激活
-    secret: 'IAV3NTLJZSNPLM5Y3ZVHP6WGIFQ2UUX5RB3XYNUUCVBRYP2753ZHCJJ4',
-    //
-    accountid: 'VA7MWV4O24JDIFIHQLZ6YPQ27KNCI4YX2ZLVGTN4C2PWSCCNYPP526TF'
-  }
 
 }

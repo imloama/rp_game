@@ -181,7 +181,7 @@ const STATE_RPS_SENDED =  3;
 const STATE_RPS_FAIL = -1;
 
 
-每周手续费统计表 周五 10点（UTC+8）进行统计，后续要根据XHB进行分发
+//每周手续费统计表 周五 10点（UTC+8）进行统计，后续要根据XHB进行分发
 const WeekFee = {
   name: 'WeekFee',
   columns: {
@@ -219,7 +219,7 @@ const Rewards = {
 }
 
 // XHB提币记录
-const withdraws = {
+const Withdraws = {
   name: 'Withdraws',
   columns: {
     id: { type: 'varchar', primary: true },
