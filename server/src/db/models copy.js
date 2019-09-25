@@ -1,6 +1,3 @@
-const bookshelf = require('../config');
-
-
 // 管理员
 const Admin = {
   name: "Admin",
